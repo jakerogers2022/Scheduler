@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import Course from './Course';
+import CourseSelector from './CourseSelector';
 import TermSelector from './TermSelector';
 
 const termMap = { F: 'Fall', W: 'Winter', S: 'Spring' };
@@ -16,14 +16,10 @@ const CourseList = ({courses}) => {
     const termCourses = courses.filter(course => selectedTerm === getCourseTerm(course));
     
     return (
-      <View>
+      <ScrollView>
         <TermSelector terms={terms} selectedTerm={selectedTerm} setSelectedTerm={setSelectedTerm}/>
-        <ScrollView>
-          <View style={styles.courseList}>
-            { termCourses.map(course => <Course key={course.id} course={course} />) }
-          </View>
-        </ScrollView>
-      </View>
+        <CourseSelector courses = {termCourses}/>
+      </ScrollView>
     );
 };
 
