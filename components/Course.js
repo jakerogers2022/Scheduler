@@ -5,14 +5,15 @@ const getCourseNumber = course => (
     course.id.slice(1)
 );
 
-const Course = ({course, isSelected, select, IsDisabled}) => (
-    <TouchableOpacity style={styles[isSelected ? 'courseButtonSelected' : IsDisabled ? 'courseButtonDisabled' : 'courseButton']} 
-    onPress={() => {if (!IsDisabled) select(course);}}>
+const Course = ({course, disabled, isActive, select, view}) => (
+    <TouchableOpacity style={styles[disabled ? 'courseButtonDisabled' : isActive ? 'courseButtonActive' : 'courseButton']}
+        onPress={() => { if (!disabled) select(course); }}
+        onLongPress={() => view(course)}>
       <Text style={styles.courseText}>
         {`CS ${getCourseNumber(course)}\n${course.meets}`}
       </Text>
     </TouchableOpacity>
-);
+  );
 
 const courseButtonBase = {
     flex: 1,

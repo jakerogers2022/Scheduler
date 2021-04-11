@@ -6,8 +6,12 @@ const Banner = ({title}) => (
   <Text style={styles.bannerStyle}>{title || '[loading...]'}</Text>
 );
 
-const ScheduleScreen = () => {
-  const [schedule, setSchedule] = useState({title: '', courses: []});
+const ScheduleScreen = ({navigation}) => {
+    const [schedule, setSchedule] = useState({ title: '', courses: [] });
+  
+    const view = (course) => {
+      navigation.navigate('CourseDetailScreen', { course });
+    };
 
   const url = 'https://courses.cs.northwestern.edu/394/data/cs-courses.php';
 
@@ -23,11 +27,11 @@ const ScheduleScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Banner title = {schedule.title}/>
-      <CourseList courses={schedule.courses}/>
+      <Banner title={schedule.title} error={schedule.error} />
+      <CourseList courses={schedule.courses} view={view} />
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

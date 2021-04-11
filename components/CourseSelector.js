@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { hasConflict } from '../utils/course';
 import Course from "./Course";
 
-const CourseSelector = ({courses}) => {
+const CourseSelector = ({courses, view}) => {
     const [selected, setSelected] = useState([]);
   
     const toggle = course => setSelected(selected => (
@@ -16,6 +16,7 @@ return (
             <Course key={course.id} course={course} select = {toggle}
               isSelected={selected.includes(course)}
               IsDisabled={hasConflict(course, selected)}
+              view = {view}
             />
         ))}
       </View>
